@@ -26,8 +26,38 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+body.background {
+  background-color: rgb(1, 10, 19);
+}
+
+h1 {
+  text-align: center;
+  font-size: xx-large;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+championNameTitle {
+  text-align: center;
+  font-size: large;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+div.item {
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+}
+
+.background {
+  background-color: rgb(1, 10, 19);
+}
+
+.caption {
+  display: block;
 }

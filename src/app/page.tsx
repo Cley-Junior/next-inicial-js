@@ -1,11 +1,16 @@
+/* eslint-disable react/jsx-key */
 'use client'
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
+// import localFont from 'next/font/local';
+
+// const beaufortFont = localFont({ src: '../../Fonts_Package/BeaufortForLoL-OTF/BeaufortforLOL-Regular' })
 
 export async function getChampionsData()
 {
-  const data = await fetch("https://ddragon.leagueoflegends.com/cdn/14.3.1/data/en_US/champion.json");
+  const data = await fetch("https://ddragon.leagueoflegends.com/cdn/14.3.1/data/pt_BR/champion.json");
   return data.json();
 }
 
@@ -15,12 +20,6 @@ export async function getChampionsFreeData()
   return data.json();
 }
 
-export async function getChampionsSplashArt()
-{
-  const image = await fetch("https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Akshan_0.jpg");
-  return image;
-}
-
 export function getChampionNameById(objeto: any, ids: number[])
 {
   let campeoes = ids.map((id) => {
@@ -28,7 +27,7 @@ export function getChampionNameById(objeto: any, ids: number[])
     {
       if(objeto[nomes].key == id)
       {
-        return nomes;
+        return (nomes + ", " + objeto[nomes].title);
       }
     }
   });
@@ -60,12 +59,27 @@ export default function Home()
   console.dir(championsData,{depth:null});
 
   return (
-    <div>
-      <h1>Champions</h1>
-      <div>
-        {
-          championsFreeNameData?.map((id) => <p key={id}>{id}</p>)
-        }
+    <div className="background">
+      <h1>Free Weekly League of Legends Champions</h1>
+      <div style={{
+        display: 'grid',
+        gridGap: '8px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(217px, auto))'
+      }}>
+          {
+            championsFreeNameData?.map((id) => (
+            <div className="item" style={{ position: 'relative', height: '440px' }}>
+              <Image 
+              src={"https://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + id?.split(',').slice(0, 1) + "_0.jpg"} 
+              quality={100}
+              width={217}
+              height={399}
+              alt={id + " Image"} 
+              />
+              <p className="caption">{id}</p>
+            </div>
+            ))
+          }
       </div>
     </div>
   )
