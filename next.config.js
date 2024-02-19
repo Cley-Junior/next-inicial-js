@@ -7,7 +7,7 @@ module.exports = {
                 protocol: 'https',
                 hostname: 'ddragon.leagueoflegends.com',
                 port: '',
-                pathname: '/cdn/img/champion/loading/**',
+                pathname: '/cdn/img/champion/**/**',
             }
         ]
     }

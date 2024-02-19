@@ -2,11 +2,8 @@
 'use client'
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-
-// import localFont from 'next/font/local';
-
-// const beaufortFont = localFont({ src: '../../Fonts_Package/BeaufortForLoL-OTF/BeaufortforLOL-Regular' })
 
 export async function getChampionsData()
 {
@@ -16,7 +13,7 @@ export async function getChampionsData()
 
 export async function getChampionsFreeData()
 {
-  const data = await fetch("https://br1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-9c60ed82-3157-4bc2-8516-b2b3c78c0fc0");
+  const data = await fetch("https://br1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-40c7059d-92e8-4486-adf9-146a40da30db");
   return data.json();
 }
 
@@ -56,11 +53,9 @@ export default function Home()
     setChampionsFreeNameData(getChampionNameById(championsData, championsFreeIdData))
   }, [championsData, championsFreeIdData])
 
-  console.dir(championsData,{depth:null});
-
   return (
     <div className="background">
-      <h1>Free Weekly League of Legends Champions</h1>
+      <h1 className="teste">Free Weekly League of Legends Champions</h1>
       <div style={{
         display: 'grid',
         gridGap: '8px',
@@ -76,7 +71,7 @@ export default function Home()
               height={399}
               alt={id + " Image"} 
               />
-              <p className="caption">{id}</p>
+              <Link href={`http://localhost:3000/campeoes/${id?.split(',').slice(0, 1)}`} className="teste caption">{id}</Link>
             </div>
             ))
           }
